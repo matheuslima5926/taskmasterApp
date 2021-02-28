@@ -31,3 +31,5 @@
 /config/master.key
 secrets.env
 Gemfile.lock
+.rspec
+.ruby-version
