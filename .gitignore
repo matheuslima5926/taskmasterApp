@@ -32,4 +32,3 @@
 secrets.env
 Gemfile.lock
 .rspec
-.ruby-version
