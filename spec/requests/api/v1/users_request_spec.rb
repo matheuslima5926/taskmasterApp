@@ -4,7 +4,11 @@ RSpec.describe "Api::V1::Users", type: :request do
     let!(:user) { FactoryBot.create(:user) }
     let(:user_id) { user.id }
     let(:headers) do
-        {'Content-Type' => Mime[:json].to_s }
+        {
+            'Content-Type' => Mime[:json].to_s,
+            'Authorization' => user.auth_token 
+        }
+
     end
 
     describe "GET /users/:id" do

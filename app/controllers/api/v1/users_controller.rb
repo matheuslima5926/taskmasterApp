@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+    before_action :authenticate_with_token! only: [:update, :destroy]
     respond_to :json
     def show
         begin
@@ -19,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
+        @user = current_user
         if @user.update(user_params)
             render json: @user
         else
@@ -28,8 +29,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def destroy
-        @user = User.find_by(id: params[:id])
-        if @user.destroy
+        if current_user.destroy
             head 204
         end
     end
