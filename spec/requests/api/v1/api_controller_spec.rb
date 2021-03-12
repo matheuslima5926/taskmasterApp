@@ -43,6 +43,11 @@ RSpec.describe "Api::V1::Users", type: :request do
                 get '/test', headers: headers
                 expect(response).to have_http_status(200)
             end
+            it "returns authenticated user email" do
+                get '/test', headers: headers
+                response_body = JSON.parse(response.body, symbolize_names: true)
+                expect(response_body[:email]).to eql(user.email)
+            end
         end
         context "when the users has not been authenticated" do
             it "returns status 401" do
